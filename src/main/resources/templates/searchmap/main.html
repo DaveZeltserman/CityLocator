@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+	<title>Large City Locator</title>
+
+</head>
+	<body>
+	
+		<div class="container">
+			<h3>Search For Closest Large City</h3>
+			<hr>
+			
+			<form action="#" th:action="@{/searchmap/search}"
+							 th:object="${city}" method="POST">
+				
+
+				<input type="text" th:field="*{city}"
+					class="form-control mb-4 col-4" placeholder="City">
+					
+				<input type="text" th:field="*{state}"
+					class="form-control mb-4 col-4" placeholder="State">
+					
+				<input type="text" th:field="*{maxDistance}"
+					class="form-control mb-4 col-4" placeholder="Maximum distance (miles)">
+							
+				<button type="submit" class="btn btn-info col-2">Search</button>		 
+			</form>
+
+		</div>
+		
+		<div class="alert alert-info">
+			<p th:text="${city.message}"></p>
+		</div>
+		
+		<div class="container">
+		
+			
+			<table class="table table-bordered table-striped">
+				<thead class="thead-dark">
+					<tr>
+						<th>City</th>
+						<th>State</th>
+						<th>Distance</th>
+					</tr>
+				</thead>
+			
+				<tbody>
+				
+					<tr th:each="largeCity : ${largeCities}">
+						<td th:text="${largeCity.city}" />
+						<td th:text="${largeCity.state}" />
+						<td th:text="${largeCity.distance}" />
+					</tr>
+				
+				</tbody>
+			</table>
+		</div>	
+	</body>
+</html>
